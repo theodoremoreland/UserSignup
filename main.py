@@ -23,16 +23,16 @@ def validate_form():
 
     if username == "":
         return render_template('index.html', username_error="Field can not be empty")
+    if len(username) <= 2 or len(username) > 20:
+        return render_template('index.html', username_error="Username is out of range 3-20")
+    if username.count(" ") > 0:
+        return render_template('index.html', username_error="Username can not have spaces")
     if password == "":
         return render_template('index.html', password_error="Fields can not be empty")
     if len(password) <= 2 or len(password) > 20:
         return render_template('index.html', password_error="Password is out of range 3-20")
-    if len(username) <= 2 or len(username) > 20:
-        return render_template('index.html', username_error="Username is out of range 3-20")
     if password.count(" ") > 0:
         return render_template('index.html', password_error="Password can not have spaces")
-    if username.count(" ") > 0:
-        return render_template('index.html', username_error="Username can not have spaces")
     if password != verify_password:
         return render_template('index.html', password_error="Passwords do not match",
         verify_error="Passwords do not match")
